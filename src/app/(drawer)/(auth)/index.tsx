@@ -7,6 +7,7 @@ export default function Home() {
         <ImageBackground style={styles.container} source={imageBg} imageStyle={{ opacity: 0.5 }}>
             <Header />
         </ImageBackground>
+
     )
 }
 
