@@ -15,6 +15,9 @@ export const styles = StyleSheet.create({
         width: 150,
         height: 150,
         borderRadius: 100,
+        shadowRadius: 2,
+        shadowColor: "#000",
+        shadowOpacity: 0.1,
     },
     bodyContent: {
         width: "100%",
