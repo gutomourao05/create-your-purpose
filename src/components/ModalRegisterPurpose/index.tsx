@@ -62,42 +62,7 @@ const ModalContent = () => {
                         </View>
                     )} />
                 <View style={styles.boxInput}>
-                    <Controller control={control} name="initialDate" render={({ field: { onChange, value, ...rest } }) => (
-                        <View>
-                            <BottomSheetTextInput
-                                showSoftInputOnFocus={false}
-                                value={value}
-                                placeholder="Data inicial"
-                                placeholderTextColor={"gray"}
-                                style={styles.inputDateTime}
-                                onFocus={() => {
-                                    setShow(true);
-                                    setType("initial");
-                                }}
-                                onChangeText={onChange}
-                                {...rest}
 
-                            />
-                            {!!errors.initialDate && <Text style={styles.error}>{errors.initialDate.message}</Text>}
-                        </View>
-                    )} />
-                    <Controller name="finalDate" control={control} render={({ field: { value, onChange, ...rest } }) => (
-                        <View>
-                            <BottomSheetTextInput
-                                showSoftInputOnFocus={false}
-                                placeholder="Data final"
-                                placeholderTextColor={"gray"}
-                                style={styles.inputDateTime}
-                                onFocus={() => {
-                                    setShow(true);
-                                    setType("final");
-                                }}
-                                value={value}
-                                onChangeText={onChange}
-                                {...rest}
-                            />
-                        </View>
-                    )} />
                 </View>
                 {show && <DateTimePicker mode={mode} value={new Date()} onChange={onChangeDate} />}
                 <TouchableOpacity style={styles.button} activeOpacity={0.8} onPress={handleSubmit(onSubmit)}>
