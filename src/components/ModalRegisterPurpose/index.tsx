@@ -23,7 +23,6 @@ const ModalContent = () => {
             setValue("finalDate", currentDate)
         }
     }
-
     const {
         control,
         setValue,
@@ -33,11 +32,9 @@ const ModalContent = () => {
         resolver: zodResolver(RegisterPurposeSchema),
         defaultValues: REGISTER_PURPOSE_DEFAULT_FORM_VALUES,
     });
-
     function onSubmit(data: RegisterPurposeForm) {
         console.log(data)
     }
-
     return (
         <BottomSheetView style={styles.contentContainer} >
             <View style={styles.header}>
@@ -62,7 +59,6 @@ const ModalContent = () => {
                         </View>
                     )} />
                 <View style={styles.boxInput}>
-
                 </View>
                 {show && <DateTimePicker mode={mode} value={new Date()} onChange={onChangeDate} />}
                 <TouchableOpacity style={styles.button} activeOpacity={0.8} onPress={handleSubmit(onSubmit)}>
