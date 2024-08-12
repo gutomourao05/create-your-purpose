@@ -32,10 +32,10 @@ Para fins de portifólio mobile.
 ```bash
 # NPM
 ## Clone o repositório
-git clone https://github.com/gutomourao05/frontend-delivery
+git clone https://github.com/gutomourao05/create-your-purpose.git
 
 ## Entre na pasta
-cd api-delivery
+cd create-your-purpose
 
 ## instale as dependencias
 npm install
@@ -45,10 +45,10 @@ npm dev
 
 # YARN
 ## Clone o repositório
-git clone https://github.com/gutomourao05/frontend-delivery
+git clone https://github.com/gutomourao05/create-your-purpose.git
 
 ## Entre na pasta
-cd api-delivery
+cd create-your-purpose
 
 ## instale as dependencias
 yarn install
