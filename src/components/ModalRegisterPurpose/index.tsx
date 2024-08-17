@@ -18,7 +18,7 @@ const ModalContent = () => {
         resolver: zodResolver(RegisterPurposeSchema),
         defaultValues: REGISTER_PURPOSE_DEFAULT_FORM_VALUES,
     });
-    function onSubmit(data: RegisterPurposeForm) {
+    const onSubmit = (data: RegisterPurposeForm) => {
         createPurpose.create(data)
     }
 
