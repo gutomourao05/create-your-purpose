@@ -4,7 +4,7 @@ import { Ionicons } from "@expo/vector-icons"
 
 import { styles } from "./styles"
 import { useAuth, useUser } from "@clerk/clerk-expo"
-import { SafeAreaView } from "react-native-safe-area-context"
+import { SafeAreaView } from "react-native"
 
 const DrawerContent = (drawerProps: DrawerContentComponentProps) => {
     const { user } = useUser()

@@ -9,7 +9,7 @@ import { usePurposeDatabase } from "@/database/hooks/usePurposeDatabase";
 
 const ModalContent = () => {
 
-    const { create: createPurpose, isLoading } = usePurposeDatabase();
+    const { create: createPurpose } = usePurposeDatabase();
 
     const {
         control,
@@ -115,7 +115,7 @@ const ModalContent = () => {
                 </View>
 
                 <TouchableOpacity style={styles.button} activeOpacity={0.8} onPress={handleSubmit(onSubmit)}>
-                    {isLoading ? <ActivityIndicator size="small" color="#FFF" /> : <Text style={styles.buttonText}>SALVAR</Text>}
+                    <Text style={styles.buttonText}>SALVAR</Text>
                 </TouchableOpacity>
             </View>
         </BottomSheetView >

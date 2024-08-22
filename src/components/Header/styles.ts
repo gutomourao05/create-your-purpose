@@ -4,10 +4,11 @@ export const styles = StyleSheet.create({
     container: {
         width: "100%",
         height: 80,
+        marginTop: 16,
+        marginBottom: 24,
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
-        padding: 24,
     },
     buttonNew: {
         width: 60,

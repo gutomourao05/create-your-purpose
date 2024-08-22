@@ -2,7 +2,7 @@ import { TouchableOpacity, Text } from "react-native"
 import { Ionicons } from "@expo/vector-icons"
 
 import { styles } from "./styles"
-import { SafeAreaView } from "react-native-safe-area-context"
+import { SafeAreaView, View } from "react-native"
 import { DrawerActions } from "@react-navigation/native"
 import { useNavigation } from "expo-router"
 import BottomSheet from '@gorhom/bottom-sheet';
