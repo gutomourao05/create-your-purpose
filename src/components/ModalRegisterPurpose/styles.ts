@@ -8,7 +8,6 @@ export const styles = StyleSheet.create({
     header: {
         width: "100%",
         alignItems: "center",
-        marginBottom: 24,
         gap: 4,
     },
     title: {
@@ -24,6 +23,15 @@ export const styles = StyleSheet.create({
         flex: 1,
     },
     input: {
+        width: "100%",
+        height: 60,
+        fontSize: 16,
+        backgroundColor: "#FFF",
+        borderRadius: 6,
+        padding: 12,
+    },
+
+    inputDate: {
         width: "100%",
         height: 60,
         fontSize: 16,
@@ -66,5 +74,16 @@ export const styles = StyleSheet.create({
         color: "#FFF",
         fontWeight: "bold",
     },
+    label: {
+        color: "#FFF",
+        fontSize: 16,
+        padding: 1
+    },
+    checkbox: {
+    },
+    labelCheckbox: {
+        color: "#FFF",
+        fontSize: 16,
+    }
 
 })

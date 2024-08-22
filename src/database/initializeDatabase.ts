@@ -1,7 +1,11 @@
 import { type SQLiteDatabase } from 'expo-sqlite';
 export async function initializeDatabase(database: SQLiteDatabase) {
-    await database.execAsync(`create table if not exists purposes (
+    await database.execAsync(`CREATE TABLE IF NOT EXISTS purposes_table (
         id integer primary key autoincrement,
-        name text not null
-    )`)
+        name text not null,
+        initialData text not null,
+        finalDate text not null,
+        withAlert boolean not null,
+        timeAlert text
+    );`);
 }

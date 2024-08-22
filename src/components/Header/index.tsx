@@ -31,7 +31,7 @@ const Header = () => {
             <BottomSheet
                 ref={bottomSheetRef}
                 index={-1}
-                snapPoints={['80%']}
+                snapPoints={['95%']}
                 enablePanDownToClose={true}
                 backgroundStyle={{ opacity: 0.7, backgroundColor: "#000" }}
                 handleIndicatorStyle={{ backgroundColor: "#FFF" }}
