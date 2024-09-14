@@ -26,8 +26,8 @@ export default function Home() {
     }
 
     useEffect(() => {
-        createPurpose()
-    }, [getAll])
+        createPurpose();
+    }, [])
 
     return (
         <ImageBackground style={styles.container} source={imageBg} imageStyle={{ opacity: 0.5 }}>
@@ -39,6 +39,8 @@ export default function Home() {
                 contentContainerStyle={{ gap: 12 }}
                 keyExtractor={item => item.id}
                 style={{ marginBottom: 44 }}
+                onEndReached={() => createPurpose()}
+                onEndReachedThreshold={0.1}
             />
             <BottomSheet
                 ref={bottomSheetRef}

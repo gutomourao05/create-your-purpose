@@ -1,6 +1,5 @@
 import { RegisterPurposeForm } from "@/components/ModalRegisterPurpose/RegisterPurposeForm"
-import { useSQLiteContext } from "expo-sqlite"
-import { useState } from "react";
+import { useSQLiteContext, openDatabaseAsync } from "expo-sqlite"
 
 export type PurposeDatabaseProps = RegisterPurposeForm & {
     id: number
@@ -25,13 +24,18 @@ export function usePurposeDatabase() {
     }
 
     async function getAll() {
+        const databaseConnector = await openDatabaseAsync("myDatabase.db", { useNewConnection: true });
+
         try {
             const query = "SELECT * FROM purposes_table"
-            const response = await database.getAllAsync(query);
-            return response;
+            const response = await databaseConnector.getAllAsync(query);
+            if (response.length > 0) {
+                return response;
+            }
         } catch (error) {
             throw error
         } finally {
+            await databaseConnector.closeAsync();
         }
     }
 

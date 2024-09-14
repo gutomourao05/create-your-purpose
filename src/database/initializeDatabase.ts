@@ -6,6 +6,7 @@ export async function initializeDatabase(database: SQLiteDatabase) {
         initialData text not null,
         finalDate text not null,
         withAlert boolean not null,
-        timeAlert text
+        timeAlert text,
+        isActive boolean not null DEFAULT 1
     );`);
 }

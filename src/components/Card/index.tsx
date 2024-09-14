@@ -18,14 +18,27 @@ const Card = (props: Props) => {
     }
 
     return (
-        <View style={styles.container} >
+        <View style={props.purpose?.isActive ? styles.containerActive : styles.containerInactive} >
             <View style={styles.cardHeader}>
-                <Text>{props.purpose?.name}</Text>
+                <Text>Nome: {props.purpose?.name}</Text>
                 <TouchableOpacity activeOpacity={0.8} onPress={() => deletePurpose(props.purpose?.id)}>
                     <Ionicons size={24} name="trash-outline" />
                 </TouchableOpacity>
             </View>
-            <Text>{props.purpose?.id}</Text>
+
+            <View style={styles.cardBody}>
+            </View>
+
+            <View style={styles.cardFooter}>
+                <View>
+                    <Text>Data Final: {props.purpose?.finalDate}</Text>
+                    <Text>Horário Alerta: {props.purpose?.timeAlert}</Text>
+                </View>
+                <TouchableOpacity activeOpacity={0.8} style={props.purpose?.isActive ? styles.activeButton : styles.inactiveButton}>
+                    <Text>{props.purpose?.isActive ? "Inativar" : "Ativar"}</Text>
+                </TouchableOpacity>
+            </View>
+
         </View>
     )
 }
