@@ -22,7 +22,7 @@ const Card = (props: Props) => {
             <View style={styles.cardHeader}>
                 <Text>{props.purpose?.name}</Text>
                 <TouchableOpacity activeOpacity={0.8} onPress={() => deletePurpose(props.purpose?.id)}>
-                    <Ionicons size={24} color={"red"} name="trash-outline" />
+                    <Ionicons size={24} name="trash-outline" />
                 </TouchableOpacity>
             </View>
             <Text>{props.purpose?.id}</Text>
