@@ -20,6 +20,8 @@ export default function Home() {
     const [data, setData] = useState<any>([])
     const { getAll } = usePurposeDatabase();
 
+    console.log(data)
+
     const createPurpose = async () => {
         const returnData = await getAll();
         setData(returnData)
@@ -35,12 +37,13 @@ export default function Home() {
             <FlatList
                 showsVerticalScrollIndicator={false}
                 data={data}
-                renderItem={({ item }) => <Card purpose={item} />}
+                renderItem={({ item }) => <Card purpose={item} update={() => createPurpose()} />}
                 contentContainerStyle={{ gap: 12 }}
                 keyExtractor={item => item.id}
                 style={{ marginBottom: 44 }}
                 onEndReached={() => createPurpose()}
                 onEndReachedThreshold={0.1}
+                onAccessibilityAction={() => createPurpose()}
             />
             <BottomSheet
                 ref={bottomSheetRef}
@@ -50,7 +53,10 @@ export default function Home() {
                 backgroundStyle={{ opacity: 0.7, backgroundColor: "#000" }}
                 handleIndicatorStyle={{ backgroundColor: "#FFF", elevation: 1, zIndex: 99 }}
             >
-                <ModalContent />
+                <ModalContent handleSavePress={() => {
+                    createPurpose();
+                    bottomSheetRef.current?.close();
+                }} />
             </BottomSheet>
         </ImageBackground>
     )

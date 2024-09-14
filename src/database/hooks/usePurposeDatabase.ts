@@ -2,7 +2,8 @@ import { RegisterPurposeForm } from "@/components/ModalRegisterPurpose/RegisterP
 import { useSQLiteContext, openDatabaseAsync } from "expo-sqlite"
 
 export type PurposeDatabaseProps = RegisterPurposeForm & {
-    id: number
+    id: number,
+    isActive: boolean
 }
 
 export function usePurposeDatabase() {
@@ -24,18 +25,29 @@ export function usePurposeDatabase() {
     }
 
     async function getAll() {
-        const databaseConnector = await openDatabaseAsync("myDatabase.db", { useNewConnection: true });
 
         try {
             const query = "SELECT * FROM purposes_table"
-            const response = await databaseConnector.getAllAsync(query);
+            const response = await database.getAllAsync(query);
             if (response.length > 0) {
                 return response;
             }
         } catch (error) {
             throw error
         } finally {
-            await databaseConnector.closeAsync();
+        }
+    }
+
+    async function updateIsActive(id: number) {
+
+        const statement = await database.prepareAsync("UPDATE purposes_table SET isActive = NOT isActive WHERE id = $id")
+        try {
+            const result = await statement.executeAsync({ $id: id })
+            return result
+        } catch (error) {
+            throw error
+        } finally {
+            await statement.finalizeAsync();
         }
     }
 
@@ -51,5 +63,5 @@ export function usePurposeDatabase() {
         }
     }
 
-    return { create, getAll, deleteById }
+    return { create, getAll, deleteById, updateIsActive }
 }

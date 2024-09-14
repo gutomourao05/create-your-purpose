@@ -65,7 +65,7 @@ export const styles = StyleSheet.create({
     button: {
         width: "100%",
         height: 60,
-        backgroundColor: "#000",
+        backgroundColor: "#FFF",
         borderRadius: 6,
         alignItems: "center",
         justifyContent: "center",
@@ -73,7 +73,7 @@ export const styles = StyleSheet.create({
     },
     buttonText: {
         fontSize: 16,
-        color: "#FFF",
+        color: "#000",
         fontWeight: "bold",
     },
     label: {

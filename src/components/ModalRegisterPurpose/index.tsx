@@ -7,13 +7,18 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { REGISTER_PURPOSE_DEFAULT_FORM_VALUES, RegisterPurposeForm, RegisterPurposeSchema } from "./RegisterPurposeForm";
 import { usePurposeDatabase } from "@/database/hooks/usePurposeDatabase";
 
-const ModalContent = () => {
+type Props = {
+    handleSavePress: () => void
+}
+
+const ModalContent = ({ handleSavePress }: Props) => {
 
     const { create: createPurpose } = usePurposeDatabase();
 
     const {
         control,
         handleSubmit,
+        reset,
         watch,
         formState: { errors, isDirty },
     } = useForm<RegisterPurposeForm>({
@@ -22,6 +27,8 @@ const ModalContent = () => {
     });
     const onSubmit = (data: RegisterPurposeForm) => {
         createPurpose(data)
+        handleSavePress()
+        reset()
     }
 
     const withAlertValue = watch("withAlert");
