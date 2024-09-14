@@ -9,15 +9,15 @@ export const RegisterPurposeSchema = z.object({
     initialData: z.string().regex(dateRegex, "Data inválida, deve estar no formato DD/MM/AAAA"),
     finalDate: z.string().regex(dateRegex, "Data inválida, deve estar no formato DD/MM/AAAA"),
     withAlert: z.boolean(),
-    timeAlert: z.string().regex(timeRegex, "Horário inválido, deve estar no formato HH:MM"),
+    timeAlert: z.string(),
     isActive: z.boolean()
 
 }).superRefine((data, ctx) => {
-    if (data.withAlert && data.timeAlert === "") {
+    if (data.withAlert && !timeRegex.test(data.timeAlert)) {
         ctx.addIssue({
             code: "custom",
             path: ["timeAlert"],
-            message: "Obrigatório",
+            message: "Horário inválido, deve estar no formato HH:MM",
         });
     }
 });;

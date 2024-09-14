@@ -20,8 +20,6 @@ export default function Home() {
     const [data, setData] = useState<any>([])
     const { getAll } = usePurposeDatabase();
 
-    console.log(data)
-
     const createPurpose = async () => {
         const returnData = await getAll();
         setData(returnData)
@@ -36,7 +34,7 @@ export default function Home() {
             <Header handlePresentModalPress={() => handlePresentModalPress()} />
             <FlatList
                 showsVerticalScrollIndicator={false}
-                data={data}
+                data={data.sort((a: any, b: any) => b.isActive - a.isActive)}
                 renderItem={({ item }) => <Card purpose={item} update={() => createPurpose()} />}
                 contentContainerStyle={{ gap: 12 }}
                 keyExtractor={item => item.id}

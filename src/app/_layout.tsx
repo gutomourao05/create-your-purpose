@@ -34,7 +34,6 @@ export default function Layout() {
                 await Font.loadAsync(Entypo.font);
                 await new Promise(resolve => setTimeout(resolve, 1000));
             } catch (e) {
-                console.warn(e);
             } finally {
                 hideAsync();
             }

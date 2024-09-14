@@ -2,8 +2,7 @@ import { RegisterPurposeForm } from "@/components/ModalRegisterPurpose/RegisterP
 import { useSQLiteContext, openDatabaseAsync } from "expo-sqlite"
 
 export type PurposeDatabaseProps = RegisterPurposeForm & {
-    id: number,
-    isActive: boolean
+    id: number
 }
 
 export function usePurposeDatabase() {
@@ -14,10 +13,7 @@ export function usePurposeDatabase() {
         const statement = await database.prepareAsync("INSERT INTO purposes_table (name, initialData, finalDate, withAlert, timeAlert) VALUES ($name, $initialData, $finalDate, $withAlert, $timeAlert);")
         try {
             await statement.executeAsync({ $name: data.name, $initialData: data.initialData, $finalDate: data.finalDate, $withAlert: data.withAlert, $timeAlert: data.timeAlert })
-            console.log(`Deu certo, segue o`)
-
         } catch (error) {
-            throw console.log(error)
 
         } finally {
             await statement.finalizeAsync();

@@ -39,7 +39,6 @@ export default function SignIn() {
 
             return setIsLoadingGoogle(false)
         } catch (error) {
-            console.log(error)
             setIsLoadingGoogle(false)
         }
     }
@@ -55,7 +54,6 @@ export default function SignIn() {
 
             return setIsLoadingApple(false)
         } catch (error) {
-            console.log(error)
             setIsLoadingApple(false)
         }
     }
