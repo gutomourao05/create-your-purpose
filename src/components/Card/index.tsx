@@ -7,14 +7,17 @@ import { TouchableOpacity } from "react-native-gesture-handler"
 
 type Props = {
     purpose: PurposeDatabaseProps
+    update: () => void
 }
 
 const Card = (props: Props) => {
 
-    const { deleteById } = usePurposeDatabase();
+
+    const { deleteById, updateIsActive } = usePurposeDatabase();
 
     const deletePurpose = async (id: any) => {
         await deleteById(id);
+        props.update();
     }
 
     return (
@@ -32,9 +35,12 @@ const Card = (props: Props) => {
             <View style={styles.cardFooter}>
                 <View>
                     <Text>Data Final: {props.purpose?.finalDate}</Text>
-                    <Text>Horário Alerta: {props.purpose?.timeAlert}</Text>
+                    {props.purpose?.withAlert ? <Text>Alerta: {props.purpose?.timeAlert}</Text> : null}
                 </View>
-                <TouchableOpacity activeOpacity={0.8} style={props.purpose?.isActive ? styles.activeButton : styles.inactiveButton}>
+                <TouchableOpacity activeOpacity={0.8} style={props.purpose?.isActive ? styles.activeButton : styles.inactiveButton} onPress={() => {
+                    updateIsActive(props.purpose?.id)
+                    props.update()
+                }}>
                     <Text>{props.purpose?.isActive ? "Inativar" : "Ativar"}</Text>
                 </TouchableOpacity>
             </View>

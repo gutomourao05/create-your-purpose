@@ -18,8 +18,7 @@ const styles = StyleSheet.create({
         width: "100%",
         height: 120,
         borderRadius: 20,
-        backgroundColor: "#000",
-        opacity: 0.6,
+        backgroundColor: "#646464",
         shadowColor: "#545454",
         shadowOpacity: 0.20,
         shadowRadius: 3.84,
@@ -49,7 +48,7 @@ const styles = StyleSheet.create({
     },
 
     activeButton: {
-        backgroundColor: "#00FF00",
+        backgroundColor: "orange",
         alignItems: "center",
         padding: 10,
         justifyContent: "center",
@@ -57,7 +56,7 @@ const styles = StyleSheet.create({
     },
 
     inactiveButton: {
-        backgroundColor: "orange",
+        backgroundColor: "#00FF00",
         padding: 10,
         alignItems: "center",
         justifyContent: "center",
