@@ -1,4 +1,4 @@
-import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native"
+import { Text, TouchableOpacity, View } from "react-native"
 import { BottomSheetTextInput, BottomSheetView } from "@gorhom/bottom-sheet"
 import Checkbox from 'expo-checkbox';
 import { styles } from "./styles"
@@ -20,13 +20,32 @@ const ModalContent = ({ handleSavePress }: Props) => {
         handleSubmit,
         reset,
         watch,
-        formState: { errors, isDirty },
+        formState: { errors },
     } = useForm<RegisterPurposeForm>({
         resolver: zodResolver(RegisterPurposeSchema),
         defaultValues: REGISTER_PURPOSE_DEFAULT_FORM_VALUES,
     });
     const onSubmit = (data: RegisterPurposeForm) => {
-        createPurpose(data)
+        let newDataInitial = ""
+        let newDataFinal = ""
+        const arrayDataInitial = data.initialData.split("/")
+        const arrayTimeAlert = data.timeAlert.split(":")
+        const arrayDataFinal = data.finalDate.split("/")
+
+        if (!data.timeAlert) {
+            newDataInitial = `${arrayDataInitial[2]}-${arrayDataInitial[1]}-${arrayDataInitial[0]}T00:00:00.000Z`
+            newDataFinal = `${arrayDataFinal[2]}-${arrayDataFinal[1]}-${arrayDataFinal[0]}T00:00:00.000Z`
+
+        } else {
+            newDataInitial = `${arrayDataInitial[2]}-${arrayDataInitial[1]}-${arrayDataInitial[0]}T${arrayTimeAlert[0]}:${arrayTimeAlert[1]}:00.000Z`
+            newDataFinal = `${arrayDataFinal[2]}-${arrayDataFinal[1]}-${arrayDataFinal[0]}T${arrayTimeAlert[0]}:${arrayTimeAlert[1]}:00.000Z`
+        }
+        createPurpose({
+            name: data.name,
+            initialData: newDataInitial,
+            finalDate: newDataFinal,
+            withAlert: data.withAlert,
+        })
         handleSavePress()
         reset()
     }

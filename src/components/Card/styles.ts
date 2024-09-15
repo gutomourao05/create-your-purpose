@@ -4,7 +4,7 @@ const styles = StyleSheet.create({
     containerActive: {
         width: "100%",
         height: 120,
-        borderRadius: 20,
+        borderRadius: 5,
         backgroundColor: "#FFF",
         shadowColor: "#545454",
         shadowOpacity: 0.20,
@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     containerInactive: {
         width: "100%",
         height: 120,
-        borderRadius: 20,
+        borderRadius: 5,
         backgroundColor: "#646464",
         shadowColor: "#545454",
         shadowOpacity: 0.20,
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         padding: 10,
         justifyContent: "center",
-        borderRadius: 10,
+        borderRadius: 5,
     },
 
     inactiveButton: {
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
         padding: 10,
         alignItems: "center",
         justifyContent: "center",
-        borderRadius: 10,
+        borderRadius: 5,
     }
 })
 

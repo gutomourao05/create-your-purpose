@@ -9,10 +9,10 @@ export function usePurposeDatabase() {
     const database = useSQLiteContext();
 
 
-    async function create(data: Omit<PurposeDatabaseProps, "id">) {
-        const statement = await database.prepareAsync("INSERT INTO purposes_table (name, initialData, finalDate, withAlert, timeAlert) VALUES ($name, $initialData, $finalDate, $withAlert, $timeAlert);")
+    async function create(data: Omit<PurposeDatabaseProps, "id" | "isActive" | "timeAlert">) {
+        const statement = await database.prepareAsync("INSERT INTO purposes_table (name, initialData, finalDate, withAlert) VALUES ($name, $initialData, $finalDate, $withAlert);")
         try {
-            await statement.executeAsync({ $name: data.name, $initialData: data.initialData, $finalDate: data.finalDate, $withAlert: data.withAlert, $timeAlert: data.timeAlert })
+            await statement.executeAsync({ $name: data.name, $initialData: data.initialData, $finalDate: data.finalDate, $withAlert: data.withAlert })
         } catch (error) {
 
         } finally {
