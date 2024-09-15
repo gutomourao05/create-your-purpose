@@ -7,7 +7,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler"
 
 export default function Layout() {
     return (
-        <SQLiteProvider databaseName="myDatabases1.db" onInit={initializeDatabase}>
+        <SQLiteProvider databaseName="myDatabases.db" onInit={initializeDatabase}>
             <BottomSheetModalProvider>
                 <GestureHandlerRootView>
                     <Drawer screenOptions={{ headerShown: false }} drawerContent={(props) => <DrawerContent {...props} />} />

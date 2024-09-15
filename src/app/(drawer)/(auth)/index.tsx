@@ -10,7 +10,6 @@ import { ModalContent } from "@/components/ModalRegisterPurpose";
 import { styles } from "./styles";
 import * as Notifications from 'expo-notifications';
 
-
 Notifications.setNotificationHandler({
     handleNotification: async () => ({
         shouldShowAlert: true,
@@ -27,12 +26,32 @@ export default function Home() {
     }, []);
 
     const [data, setData] = useState<any>([])
-    const { getAll } = usePurposeDatabase();
+    const { getAll, updateIsActive } = usePurposeDatabase();
 
     const createPurpose = async () => {
         const returnData = await getAll();
         setData(returnData)
     }
+
+    function hasTimePassed(finalDateTime: Date) {
+        const currentDate = new Date();
+        currentDate.setHours(currentDate.getHours() - 3);
+        return currentDate >= finalDateTime;
+    }
+
+
+    useEffect(() => {
+        createPurpose();
+
+        data.map((item: PurposeDatabaseProps) => {
+            const dateFinal = new Date(item.finalDate);
+            const verify = hasTimePassed(dateFinal);
+            if (verify && item.isActive) {
+                updateIsActive(item.id);
+            }
+        })
+
+    }, [])
 
     useEffect(() => {
         createPurpose();
@@ -44,38 +63,32 @@ export default function Home() {
         if (status !== 'granted') {
             await Notifications.requestPermissionsAsync();
         }
-
-        await Notifications.scheduleNotificationAsync({
-            content: {
-                title: 'Cronograma',
-                body: 'Cronograma criado',
-            },
-            trigger: { seconds: 5 },
-        })
     }, [])
 
-    setInterval(() => {
-        const currentData = new Date();
-        const yearCurrent = currentData.getFullYear();
-        const monthCurrent = currentData.getMonth();
-        const dayCurrent = currentData.getDate();
+    useEffect(() => {
         data?.map((item: PurposeDatabaseProps) => {
-            if (item.isActive && item.withAlert) {
-                const initialData = new Date(item.initialData);
-                const yearInitial = initialData.getFullYear();
-                const monthInitial = initialData.getMonth();
-                const dayInitial = initialData.getDate();
+            const dateInitial = new Date(item.initialData)
 
-                const finalDate = new Date(item.finalDate);
-                const yearFinal = finalDate.getFullYear();
-                const monthFinal = finalDate.getMonth();
-                const dayFinal = finalDate.getDate();
+            if (item.withAlert && item.isActive && hasTimePassed(dateInitial)) {
+                const dateInitial = new Date(item.initialData)
+                const hour = dateInitial.getHours() + 3
+                const minute = dateInitial.getMinutes()
 
-
-
+                Notifications.scheduleNotificationAsync({
+                    content: {
+                        title: `Alerta de do seu proposito: ${item.name}`,
+                        body: `Seu pedido de alerta para seu proposito ${item.name} chegou, não se esqueça, faça tudo como se fosse para Jesus.`,
+                    },
+                    trigger: {
+                        hour: hour,
+                        minute: minute,
+                        repeats: true,
+                        channelId: `${item.id}-${item.name}`,
+                    }
+                })
             }
         })
-    }, 1000)
+    }, [data])
 
     return (
         <ImageBackground style={styles.container} source={imageBg} imageStyle={{ opacity: 0.5 }}>
