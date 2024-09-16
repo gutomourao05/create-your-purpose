@@ -9,9 +9,7 @@ import { styles } from './styles'
 import imgBg from "@/images/bg-signIn.jpg";
 import { ButtonSignIn } from "@/components/ButtonSignIn";
 
-
 WebBrowser.maybeCompleteAuthSession();
-
 
 export default function SignIn() {
 

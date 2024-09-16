@@ -28,6 +28,7 @@ export default function Home() {
     const [data, setData] = useState<any>([])
     const { getAll, updateIsActive } = usePurposeDatabase();
 
+
     const createPurpose = async () => {
         const returnData = await getAll();
         setData(returnData)
@@ -39,23 +40,20 @@ export default function Home() {
         return currentDate >= finalDateTime;
     }
 
-
     useEffect(() => {
         createPurpose();
+    }, [])
 
-        data.map((item: PurposeDatabaseProps) => {
+    useEffect(() => {
+        data?.map((item: PurposeDatabaseProps) => {
             const dateFinal = new Date(item.finalDate);
-            const verify = hasTimePassed(dateFinal);
-            if (verify && item.isActive) {
+            const verifyDate = hasTimePassed(dateFinal);
+            if (verifyDate && item.isActive) {
                 updateIsActive(item.id);
             }
         })
 
-    }, [])
-
-    useEffect(() => {
-        createPurpose();
-    }, [])
+    }, [data])
 
     useMemo(async () => {
         const { status } = await Notifications.getPermissionsAsync();
@@ -64,31 +62,6 @@ export default function Home() {
             await Notifications.requestPermissionsAsync();
         }
     }, [])
-
-    useEffect(() => {
-        data?.map((item: PurposeDatabaseProps) => {
-            const dateInitial = new Date(item.initialData)
-
-            if (item.withAlert && item.isActive && hasTimePassed(dateInitial)) {
-                const dateInitial = new Date(item.initialData)
-                const hour = dateInitial.getHours() + 3
-                const minute = dateInitial.getMinutes()
-
-                Notifications.scheduleNotificationAsync({
-                    content: {
-                        title: `Alerta de do seu proposito: ${item.name}`,
-                        body: `Seu pedido de alerta para seu proposito ${item.name} chegou, não se esqueça, faça tudo como se fosse para Jesus.`,
-                    },
-                    trigger: {
-                        hour: hour,
-                        minute: minute,
-                        repeats: true,
-                        channelId: `${item.id}-${item.name}`,
-                    }
-                })
-            }
-        })
-    }, [data])
 
     return (
         <ImageBackground style={styles.container} source={imageBg} imageStyle={{ opacity: 0.5 }}>

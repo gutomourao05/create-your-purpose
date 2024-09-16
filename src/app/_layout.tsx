@@ -7,7 +7,6 @@ import Entypo from '@expo/vector-icons/Entypo';
 import * as Font from 'expo-font';
 import { preventAutoHideAsync, hideAsync } from 'expo-splash-screen';
 
-
 const PUBLIC_CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY as string;
 
 preventAutoHideAsync();
@@ -24,10 +23,6 @@ const InitialLayout = () => {
         }
     }, [isSignedIn])
 
-    return isLoaded ? <Slot /> : <ActivityIndicator style={{ flex: 1, justifyContent: "center", alignItems: "center" }} />
-}
-
-export default function Layout() {
     useEffect(() => {
         async function prepare() {
             try {
@@ -38,9 +33,13 @@ export default function Layout() {
                 hideAsync();
             }
         }
-
         prepare();
     }, []);
+
+    return isLoaded ? <Slot /> : <ActivityIndicator style={{ flex: 1, justifyContent: "center", alignItems: "center" }} />
+}
+
+export default function Layout() {
 
     return (
         <ClerkProvider publishableKey={PUBLIC_CLERK_PUBLISHABLE_KEY} tokenCache={tokenCache}>
