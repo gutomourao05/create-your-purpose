@@ -4,8 +4,6 @@ export const styles = StyleSheet.create({
     contentContainer: {
         flex: 1,
         padding: 18,
-        elevation: 1,
-        zIndex: 99,
     },
     header: {
         width: "100%",
